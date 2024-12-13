@@ -35,13 +35,13 @@ const CardContainer = ({ theme }) => {
       {cards.map(card => (
         <div
           key={card.id}
-          className={`p-4 rounded-lg shadow-lg transition-all ${
+          className={`p-4 rounded-lg shadow-lg transition-all cursor-pointer hover:text-green-500 transition-colors duration-300${
             theme === 'dark' 
               ? 'bg-gray-800 text-gray-100' 
               : 'bg-white text-gray-900'
           }`}
         >
-          <h2 className="font-semibold text-xl upercase">{card.title}</h2>
+          <h2 className="font-semibold text-xl uppercase mb-2">{card.title}</h2>
           <p>{card.body}</p>
         </div>
       ))}

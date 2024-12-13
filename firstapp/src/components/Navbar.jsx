@@ -1,33 +1,35 @@
-import React, { useEffect } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import React from 'react';
+import { FaRegAddressCard, FaHome } from 'react-icons/fa';
+import ThemeToggle from './themetoggle';
 
-const ThemeToggle = ({ theme, setTheme }) => {
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+const Navbar = ({ theme, setTheme, showCards, setShowCards }) => {
+  const handleCardClick = () => {
+    setShowCards(!showCards);
   };
 
-  // Apply the theme to the document
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.body.classList.remove('bg-white');
-      document.body.classList.add('bg-gray-900');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('bg-gray-900');
-      document.body.classList.add('bg-white');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
   return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+    <header
+      className={`sticky top-0 z-10 flex justify-between items-center p-4 ${
+        theme === 'dark' ? 'bg-gray-800 text-gray-100' : 'bg-gray-200 text-gray-900'
+      }`}
     >
-      {theme === 'light' ? <FaSun size={24} /> : <FaMoon size={24} />}
-    </button>
+      {/* Brand Name */}
+      <h1 className="text-xl font-bold">EchoEnigma</h1>
+
+      {/* Icons Section */}
+      <div className="flex items-center space-x-4">
+
+        {/* Card Icon with Hover Effect */}
+        <FaRegAddressCard
+          className="text-2xl cursor-pointer hover:text-blue-500 transition-colors duration-300"
+          onClick={handleCardClick}
+        />
+
+        {/* Theme Toggle */}
+        <ThemeToggle theme={theme} setTheme={setTheme} />
+      </div>
+    </header>
   );
 };
 
-export default ThemeToggle;
+export default Navbar;
